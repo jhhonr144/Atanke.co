@@ -66,20 +66,30 @@ class LoginController extends Controller
         }
         return response()->json($datos);
     }
-    public function salir()
+    public function salir(Request $request)
     {
-        try {
-            $userTokens = auth()->user()->tokens;
-            foreach ($userTokens as $token) {
-                $token->revoke();
-            }
-        } catch (\Exception $e) {
-            return response()->json([$e], 403);
+        $user = $request->user('sanctum');
+        if (!$user) {
+            return response()->json(['error' => 'No autenticado'], 401);
         }
-
+        $user->tokens()->delete();
+        
         $datos = new Datos();
         $datos->id = 0;
         $datos->mensaje = "Salido";
         return response()->json($datos);
     }
+    public function ok(Request $request)
+    {
+        $user = $request->user();
+        if (!$user) {
+            return response()->json(['error' => 'No autenticado'], 401);
+        }
+        return response()->json('ok');
+    }
+    public function no()
+    {
+        return response()->json('no', 401);
+    }
 }
+
