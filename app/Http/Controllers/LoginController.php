@@ -51,8 +51,8 @@ class LoginController extends Controller
         try {
             if (!Auth::attempt($request->only('email', 'password'))) {
                 $datos->id = 1;
-                $datos->mensaje = "Error al logearse";
-                return response()->json($datos, 401);
+                $datos->mensaje = "Error al logearse.";
+                return response()->json($datos);
             }
             $user = User::where('email', $request->email)->firstOrFail();
             $token = $user->CreateToken('auth_token')->plainTextToken;
