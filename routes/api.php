@@ -14,4 +14,4 @@ Route::get('/no', [LoginController::class, 'no'])->name('no');
 Route::resource('/roles',RolesController::class);
 Route::post('/user/nuevo',[LoginController::class,'registro']);
 Route::post('/login',[LoginController::class,'login'])->name('login');
-Route::post('/salir', [LoginController::class, 'salir']);
+Route::get('/salir', [LoginController::class, 'salir']);
