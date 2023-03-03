@@ -63,6 +63,8 @@ class LoginController extends Controller
             }
             $user = User::where('email', $request->email)->firstOrFail();
             $token = $user->CreateToken('auth_token')->plainTextToken;
+            $user->remember_token=$token;
+            $user->save();
             $datos->id = 0;
             $datos->mensaje = $token;
             $datos->datos = $user;

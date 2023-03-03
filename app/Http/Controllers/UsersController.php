@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Datos;
 use App\Models\User;
 use Illuminate\Http\Request;
+
 use League\Flysystem\Visibility;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\Support\Facades\Auth;
-
 
 
 class UsersController extends Controller
@@ -23,7 +22,8 @@ class UsersController extends Controller
         $dato = $req->has('dato') ? $req->dato : null;
         $query = User::query();
         if (!empty($dato)) {
-            $query->where('nombre', 'like', '%' . $dato . '%');
+            $query->where('name', 'like', '%' . $dato . '%')
+            ->orWhere('email', 'like', '%' . $dato . '%');
         }
         $User = $query->paginate($cantidad, ['*'], 'page', $pagina);
 
@@ -73,6 +73,7 @@ class UsersController extends Controller
      * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
+  
     public function show(User $role)
     {
         $User = User::find($role->id);
