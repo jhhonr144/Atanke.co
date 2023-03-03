@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
-use App\Http\Controllers\RolesController;
-use App\Http\Controllers\UsersController;
+use App\Http\Controllers\RolesController; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
