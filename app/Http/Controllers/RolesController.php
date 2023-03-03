@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Datos;
 use App\Models\Roles;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RolesController extends Controller
 {
@@ -30,6 +32,29 @@ class RolesController extends Controller
         return response()->json($datos);
     }
 
+    public function misPermiso(Request $request){ 
+       
+        $datos= new Datos();
+        $user = $request->user();
+        if (!$user) {
+            $datos->id=1;
+            $datos->mensaje="Error al listar Permiso, no token";  
+            return response()->json($datos);
+        }
+        try{ 
+            $rol= Roles::find($user->r_users_roles);
+            $datos->id=0;
+            $datos->mensaje="Listado de Permiso";
+            $datos->datos=$rol->permisos;
+            $datos->datos_len=$rol->permisos->count();
+        } 
+        catch (\Exception $e) { 
+            $datos->id=1;
+            $datos->mensaje="Error al listar Roles\n".$e; 
+        }
+        return response()->json($datos);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -39,24 +64,13 @@ class RolesController extends Controller
     {
         //
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+ 
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Roles  $roles
-     * @return \Illuminate\Http\Response
-     */
+   
     public function show(Roles $role)
     {  
         $roles = Roles::find($role->id);
@@ -74,35 +88,19 @@ class RolesController extends Controller
         return response()->json(($datos));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Roles  $roles
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Roles $roles)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Roles  $roles
-     * @return \Illuminate\Http\Response
-     */
+   
     public function update(Request $request, Roles $roles)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Roles  $roles
-     * @return \Illuminate\Http\Response
-     */
+   
     public function destroy(Roles $roles)
     {
         //
