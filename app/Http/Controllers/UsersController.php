@@ -6,6 +6,13 @@ use App\Models\Datos;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+use League\Flysystem\Visibility;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
+
+
 class UsersController extends Controller
 {
     public function listarP(Request $req)
@@ -34,7 +41,39 @@ class UsersController extends Controller
     }
 
 
+    public function uploadImage(Request $request)
+    {
+       
+        $user = $request->user();
 
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 400);
+        }
+
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->storeAs('public/images', $imageName, ['visibility' => 'public']);
+
+        $user->image_path = $imageName;
+        $user->save();
+
+        return response()->json(['image_url' => Storage::url("images/$imageName")], 200);
+
+    }
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $User
+     * @return \Illuminate\Http\Response
+     */
+  
     public function show(User $role)
     {
         $User = User::find($role->id);

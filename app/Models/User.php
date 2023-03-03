@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'r_users_roles',
         'r_users_estados',
+        'image_path'
     ];
 
     /**
