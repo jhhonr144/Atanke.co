@@ -2,16 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datos;
 use App\Models\Palabras;
 use Illuminate\Http\Request;
 
 class PalabrasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function listar(Request $req)
+    {
+        $pagina = $req->has('pagina') ? $req->pagina : 1;
+        $cantidad = $req->has('cantidad') ? $req->cantidad : 5;
+        $dato = $req->has('dato') ? $req->dato : null;
+        $query = Palabras::query();
+        if ($dato) $query->where('palabra', 'like', "%$dato%")
+        ->orWhere('pronunciar', 'like', "%$dato%");
+        $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
+        $datos = new Datos();
+        try {
+            $datos->id = $palabra->lastPage();
+            $datos->mensaje = "Listado de Palabra #{$pagina}";
+            $datos->datos = $palabra->items();
+            $datos->datos_len = $palabra->total();
+        } catch (\Exception $e) {
+            $datos->id = -1;
+            $datos->mensaje = "Error al listar Palabra\n" . $e;
+        }
+        return response()->json($datos);
+    }
     public function index()
     {
         //

@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('lecturas', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('descripcion', 1000)->nullable();
             $table->unsignedBigInteger('fk_portada');
             $table->foreign('fk_portada')->references('id')->on('multimedias');
             $table->unsignedBigInteger('fk_tipo');
             $table->foreign('fk_tipo')->references('id')->on('tipo_lecturas');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
