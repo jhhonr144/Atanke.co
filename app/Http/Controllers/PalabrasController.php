@@ -13,10 +13,12 @@ class PalabrasController extends Controller
         $pagina = $req->has('pagina') ? $req->pagina : 1;
         $cantidad = $req->has('cantidad') ? $req->cantidad : 5;
         $dato = $req->has('dato') ? $req->dato : null;
+        $idioma = $req->has('idioma') ? $req->idioma : null;
         $query = Palabras::query();
+        if ($idioma) $query->where('fk_idioma', $idioma);
         if ($dato) $query->where('palabra', 'like', "%$dato%")
         ->orWhere('pronunciar', 'like', "%$dato%");
-        $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
+        $palabra = $query->with('multimedia(1)')->paginate($cantidad, ['*'], 'pagina', $pagina);
         $datos = new Datos();
         try {
             $datos->id = $palabra->lastPage();
