@@ -2,16 +2,36 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datos;
 use App\Models\Lecturas;
 use Illuminate\Http\Request;
 
 class LecturasController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function listar(Request $req)
+    {
+        $pagina = $req->has('pagina') ? $req->pagina : 1;
+        $cantidad = $req->has('cantidad') ? $req->cantidad : 5;
+        $dato = $req->has('dato') ? $req->dato : null;
+        $query = Lecturas::withCount('sesiones as cantidad_sesiones') 
+        ->with('user:id,name')
+        ->with('portada:id,multimedia')
+        ->with('tipo:id,nombre')
+            ;
+        if ($dato) $query->where('nombre', 'like', "%$dato%");
+        $lecturas = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
+        $datos = new Datos();
+        try {
+            $datos->id = $lecturas->lastPage();
+            $datos->mensaje = "Listado de Lecturas #{$pagina}";
+            $datos->datos = $lecturas->items();
+            $datos->datos_len = $lecturas->total();
+        } catch (\Exception $e) {
+            $datos->id = -1;
+            $datos->mensaje = "Error al listar Lecturas\n" . $e;
+        }
+        return response()->json($datos);
+    }
     public function index()
     {
         //
