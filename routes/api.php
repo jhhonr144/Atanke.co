@@ -6,6 +6,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PalabrasController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RolesController; 
+use App\Http\Controllers\traducirPalabras\traducirPalabrasController; 
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -17,10 +18,12 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/Lecturas',[LecturasController::class,'listar']); 
     Route::get('/Categorias',[LecturasTipoController::class,'index']); 
-    Route::get('/Palabras',[PalabrasController::class,'listar']); 
+    Route::post('/palabras',[PalabrasController::class,'listar']); 
    
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
 Route::post('/login',[LoginController::class,'login'])->name('login');
 Route::post('/user/nuevo',[LoginController::class,'registro']);
 Route::get('/salir', [LoginController::class, 'salir']);
+//traducir palabras
+Route::post('/traducir', [traducirPalabrasController::class,'traducir']);

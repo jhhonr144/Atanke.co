@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('palabras', function (Blueprint $table) {
             $table->id();
-            $table->string('palabra');
+            $table->string('palabra',25);
             $table->string('pronunciar');
             $table->timestamps(); 
             $table->unsignedBigInteger('fk_user');
