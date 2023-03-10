@@ -18,7 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::get('/Lecturas',[LecturasController::class,'listar']); 
     Route::get('/Categorias',[LecturasTipoController::class,'index']); 
-    Route::get('/palabras',[PalabrasController::class,'listar']); 
+    Route::get('/Palabras',[PalabrasController::class,'listar']); 
    
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
