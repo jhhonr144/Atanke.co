@@ -25,7 +25,7 @@ Servicios que agrupa funcionalidades necesarias para un traductor indigena. tien
 
 ## Detalle de funcionalidades
 
-### [traducirPalabras](app\Http\Controllers\traducirPalabras\README.md)
+### [traducirPalabras](app/Http/Controllers/traducirPalabras/README.md)
 Servicio para traduccion de palabras o textos enviados.
 
 ## Arquitectura
