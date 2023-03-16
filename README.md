@@ -1,4 +1,5 @@
 # Atanke.co
+ 
 
 Servicios que agrupa funcionalidades necesarias para un traductor indigena.
 
@@ -45,8 +46,9 @@ El equipo involucrado en la implementación de estas funcionalidades se detalla 
 
 - Equipo de Desarrollo: Atanke.co
     - Jhon Rafael Pacheco Escalona (jhon.pacheco@insoftar.com)
+    - Pozo Wilfrido (wpozo@unicesar.edu.co)
 ---
 
 ## Licencia
 
-- Copyright 2022 ©
+- Copyright 2022 © 

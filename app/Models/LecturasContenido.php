@@ -20,7 +20,7 @@ class LecturasContenido extends Model
 
     public function tipoContenido()
     {
-        return $this->belongsTo(LecturasTipo::class);
+        return $this->belongsTo(LecturasContenidoTipo::class,'fk_tipo');
     }
 
     public function sesionLectura()

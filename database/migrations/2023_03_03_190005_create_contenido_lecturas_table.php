@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('contenido_lecturas', function (Blueprint $table) {
             $table->id();
-            $table->string('contenido');
+            $table->string('contenido',1000);
             $table->integer('posicion');
             $table->unsignedBigInteger('fk_tipo');
             $table->foreign('fk_tipo')->references('id')->on('tipo_contenidos'); 

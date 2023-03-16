@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Datos;
+use App\Models\LecturasContenidoTipo;
 use App\Models\TipoContenido;
 use Illuminate\Http\Request;
 
@@ -14,7 +16,18 @@ class TipoContenidoController extends Controller
      */
     public function index()
     {
-        //
+        $tipos = LecturasContenidoTipo::all();
+        $datos = new Datos(); 
+        try {
+            $datos->id = 0;
+            $datos->mensaje = "lista de Tipo de contenido";
+            $datos->datos = $tipos;
+            $datos->datos_len = $tipos->count();
+        } catch (\Exception $e) {
+            $datos->id = -1;
+            $datos->mensaje = "Error al lista Tipos contenidos\n" . $e;
+        }
+        return response()->json($datos);
     }
 
     /**
