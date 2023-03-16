@@ -14,16 +14,17 @@ class LecturasSession  extends Model
     protected $fillable = [
         'nombre',
         'posicion',
-        'lectura_id',
+        'fk_lectura',
     ];
 
     public function lectura()
     {
-        return $this->belongsTo(Lectura::class);
+        return $this->belongsTo(Lecturas::class,'fk_lectura');
     }
 
     public function contenidoLecturas()
     {
-        return $this->hasMany(LecturasContenido::class);
+        return $this->hasMany(LecturasContenido::class, 'fk_sesion');
     }
+    
 }
