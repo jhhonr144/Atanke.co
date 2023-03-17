@@ -1,4 +1,4 @@
-# traducirPalabras
+# User_Update
 
 Servicio para actualizar los datos de un usuario,por el id recibido,
 tener encuenta que debe tener el permiso de 'editar_usuario'
