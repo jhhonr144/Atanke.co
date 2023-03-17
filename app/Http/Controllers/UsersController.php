@@ -23,7 +23,7 @@ class UsersController extends Controller
         $query = User::query();
         if (!empty($dato)) {
             $query->where('name', 'like', '%' . $dato . '%')
-            ->orWhere('email', 'like', '%' . $dato . '%');
+                ->orWhere('email', 'like', '%' . $dato . '%');
         }
         $User = $query->paginate($cantidad, ['*'], 'page', $pagina);
 
@@ -40,10 +40,15 @@ class UsersController extends Controller
         return response()->json($datos);
     }
 
+    
+
+
+   
+
 
     public function uploadImage(Request $request)
     {
-       
+
         $user = $request->user();
 
         $validator = Validator::make($request->all(), [
@@ -62,7 +67,6 @@ class UsersController extends Controller
         $user->save();
 
         return response()->json(['image_url' => Storage::url("images/$imageName")], 200);
-
     }
 
 
@@ -73,7 +77,7 @@ class UsersController extends Controller
      * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
-  
+
     public function show(User $role)
     {
         $User = User::find($role->id);

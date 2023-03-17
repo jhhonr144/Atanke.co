@@ -44,7 +44,7 @@ class ContenidoLecturaController extends Controller
      * @param  \App\Models\ContenidoLectura  $contenidoLectura
      * @return \Illuminate\Http\Response
      */
-    public function show(ContenidoLectura $contenidoLectura)
+    public function show( $contenidoLectura)
     {
         //
     }
@@ -55,7 +55,7 @@ class ContenidoLecturaController extends Controller
      * @param  \App\Models\ContenidoLectura  $contenidoLectura
      * @return \Illuminate\Http\Response
      */
-    public function edit(ContenidoLectura $contenidoLectura)
+    public function edit( $contenidoLectura)
     {
         //
     }
@@ -67,7 +67,7 @@ class ContenidoLecturaController extends Controller
      * @param  \App\Models\ContenidoLectura  $contenidoLectura
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ContenidoLectura $contenidoLectura)
+    public function update(Request $request,  $contenidoLectura)
     {
         //
     }
@@ -78,7 +78,7 @@ class ContenidoLecturaController extends Controller
      * @param  \App\Models\ContenidoLectura  $contenidoLectura
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ContenidoLectura $contenidoLectura)
+    public function destroy( $contenidoLectura)
     {
         //
     }
