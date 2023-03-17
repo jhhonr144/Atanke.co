@@ -46,49 +46,6 @@ class LecturasTipoController extends Controller
     {
         //
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\TipoLecturas  $tipoLecturas
-     * @return \Illuminate\Http\Response
-     */
-    public function show(TipoLecturas $tipoLecturas)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\TipoLecturas  $tipoLecturas
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TipoLecturas $tipoLecturas)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\TipoLecturas  $tipoLecturas
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TipoLecturas $tipoLecturas)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\TipoLecturas  $tipoLecturas
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(TipoLecturas $tipoLecturas)
-    {
-        //
-    }
+ 
+  
 }
