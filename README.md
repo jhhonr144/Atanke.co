@@ -50,5 +50,4 @@ El equipo involucrado en la implementación de estas funcionalidades se detalla 
 ---
 
 ## Licencia
-
 - Copyright 2022 ©  
