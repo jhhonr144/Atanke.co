@@ -10,7 +10,8 @@ use App\Http\Controllers\PalabrasController;
 use App\Http\Controllers\UsersController; 
 use App\Http\Controllers\TipoContenidoController; 
 use App\Http\Controllers\RolesController; 
-use App\Http\Controllers\traducirPalabras\traducirPalabrasController;  
+use App\Http\Controllers\traducirPalabras\traducirPalabrasController;
+use App\Http\Controllers\User\updated\userUpdated;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -20,6 +21,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/user',[UsersController::class,'listarP']); 
     Route::post('/users/upload-image',[ UsersController::class, 'uploadImage']);
+    Route::put('/user',[userUpdated::class,'update']); 
+    Route::put('/user/rol',[userUpdated::class,'updateRol']); 
     
     Route::get('/Lecturas',[LecturasController::class,'listar']); 
     Route::post('/Lecturas',[LecturasController::class,'create']); 

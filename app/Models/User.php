@@ -51,7 +51,7 @@ class User extends Authenticatable
     public function elRol()
     {
         return $this->belongsTo(Roles::class, 'r_users_roles')
-        ->distinct();
+            ->distinct();
     }
 
     public function permisos()
@@ -61,6 +61,14 @@ class User extends Authenticatable
 
     public function elPermiso()
     {
-        return $this->roles->permisos() ->distinct();
+        return $this->roles->permisos()->distinct();
+    }
+    public function estado()
+    {
+        return $this->belongsTo(Estados::class, 'r_users_estados');
+    }
+    public function elEstado()
+    {
+        return $this->belongsTo(Estados::class, 'r_users_estados')->distinct();
     }
 }
