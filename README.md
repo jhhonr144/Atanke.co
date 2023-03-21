@@ -1,4 +1,5 @@
 # Atanke.co
+ 
 
 Servicios que agrupa funcionalidades necesarias para un traductor indigena.
 
@@ -45,39 +46,9 @@ El equipo involucrado en la implementación de estas funcionalidades se detalla 
 
 - Equipo de Desarrollo: Atanke.co
     - Jhon Rafael Pacheco Escalona (jhon.pacheco@insoftar.com)
+    - Pozo Wilfrido (wpozo@unicesar.edu.co)
 ---
 
 ## Licencia
 
-- Copyright 2022 ©
-
-
-### [UpdateUser](app/Http/Controllers/updateuser/README.md)
-
-Servicio para traduccion de palabras o textos enviados.
-
-## Arquitectura
-### Construido con
-### Desarrollo
-### Pruebas unitarias
-## Seguridad
-
-## Endpoints
-
-- **DEV**
-    
-     - users: http://127.0.0.1:8000/api/users/6
-     -  Update: http://127.0.0.1:8000/api/users/6
-
-
-# Autores
-
-El equipo involucrado en la implementación de estos componentes se detalla a continuación:
-
-- Equipo de Desarrollo: Atanke.co
-    - Miguel angel sardo (msardo@unicesar.edu.co)
----
-
-## Licencia
-
-- Copyright 2022 ©
+- Copyright 2022 ©  

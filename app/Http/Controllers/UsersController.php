@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Datos;
 use App\Models\User;
-use Illuminate\Http\Request;
-
-use League\Flysystem\Visibility;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Validator; 
 
 
 class UsersController extends Controller
@@ -40,11 +36,6 @@ class UsersController extends Controller
         return response()->json($datos);
     }
 
-    
-
-
-   
-
 
     public function uploadImage(Request $request)
     {
@@ -67,6 +58,7 @@ class UsersController extends Controller
         $user->save();
 
         return response()->json(['image_url' => Storage::url("images/$imageName")], 200);
+
     }
 
 
@@ -77,7 +69,7 @@ class UsersController extends Controller
      * @param  \App\Models\User  $User
      * @return \Illuminate\Http\Response
      */
-
+  
     public function show(User $role)
     {
         $User = User::find($role->id);
