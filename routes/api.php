@@ -1,5 +1,4 @@
 <?php
-
 use App\Http\Controllers\LecturaContenidoController;
 use App\Http\Controllers\LecturasController;
 use App\Http\Controllers\LecturasSessionController;
