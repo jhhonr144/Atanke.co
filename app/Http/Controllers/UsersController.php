@@ -35,6 +35,8 @@ class UsersController extends Controller
         }
         return response()->json($datos);
     }
+
+
     public function uploadImage(Request $request)
     {
 
@@ -56,5 +58,31 @@ class UsersController extends Controller
         $user->save();
 
         return response()->json(['image_url' => Storage::url("images/$imageName")], 200);
-    } 
+
+    }
+
+
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\User  $User
+     * @return \Illuminate\Http\Response
+     */
+  
+    public function show(User $role)
+    {
+        $User = User::find($role->id);
+        $datos = new Datos();
+        try {
+            $datos->id = 0;
+            $datos->mensaje = "User #" . $role->id;
+            $datos->datos = $User->permisos;
+            $datos->datos_len = 1;
+        } catch (\Exception $e) {
+            $datos->id = 1;
+            $datos->mensaje = "Error al buscar Rol {$role}\n" . $e;
+        }
+        return response()->json(($datos));
+    }
 }
