@@ -4,17 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-class Estados extends Model
+ 
+class LecturasTipo extends Model
 {
-    use HasFactory; 
+    use HasFactory;
+    protected $table = 'tipo_lecturas';
+
     protected $fillable = [
         'nombre',
-        'descripcion',
     ];
 
-    public function users()
+    
+    public function lecturas()
     {
-        return $this->hasMany(User::class, 'r_users_estados');
+        return $this->hasMany(Lecturas::class);
     }
 }

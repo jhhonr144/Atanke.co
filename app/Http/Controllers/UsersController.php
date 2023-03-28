@@ -4,13 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Datos;
 use App\Models\User;
-use Illuminate\Http\Request;
-
-use League\Flysystem\Visibility;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request; 
+use Illuminate\Support\Facades\Storage; 
+use Illuminate\Support\Facades\Validator; 
 
 
 class UsersController extends Controller
@@ -23,7 +19,7 @@ class UsersController extends Controller
         $query = User::query();
         if (!empty($dato)) {
             $query->where('name', 'like', '%' . $dato . '%')
-            ->orWhere('email', 'like', '%' . $dato . '%');
+                ->orWhere('email', 'like', '%' . $dato . '%');
         }
         $User = $query->paginate($cantidad, ['*'], 'page', $pagina);
 
@@ -43,7 +39,7 @@ class UsersController extends Controller
 
     public function uploadImage(Request $request)
     {
-       
+
         $user = $request->user();
 
         $validator = Validator::make($request->all(), [

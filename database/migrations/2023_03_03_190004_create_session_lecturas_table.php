@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('idiomas', function (Blueprint $table) {
+        Schema::create('session_lecturas', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',20);
+            $table->string('nombre');
+            $table->integer('posicion');
+            $table->unsignedBigInteger('fk_lectura');
+            $table->foreign('fk_lectura')->references('id')->on('lecturas');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('idiomas');
+        Schema::dropIfExists('session_lecturas');
     }
 };

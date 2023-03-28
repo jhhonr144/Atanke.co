@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('idiomas', function (Blueprint $table) {
-            $table->id();
-            $table->string('nombre',20);
-            $table->timestamps();
+        Schema::table('palabras', function (Blueprint $table) { 
+            $table->enum('estado', ['pendiente', 'aprobado', 'rechazado'])
+            ->nullable(false)
+            ->default('pendiente');
         });
     }
 
@@ -27,6 +27,8 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('idiomas');
+        Schema::table('palabras', function (Blueprint $table) {
+            $table->dropColumn('estado');
+        });
     }
 };

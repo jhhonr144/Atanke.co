@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Datos;
-use App\Models\Roles;
-use App\Models\User;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Permisos;
+use App\Models\Roles; 
+use Illuminate\Http\Request; 
 
 class RolesController extends Controller
 {
@@ -45,6 +44,12 @@ class RolesController extends Controller
             $rol= Roles::find($user->r_users_roles);
             $datos->id=0;
             $datos->mensaje="Listado de Permiso";
+            if($rol->nombre=='admin') {
+                $permiso = new Permisos();
+                $permiso->nombre = 'ALL';
+                $permiso->descripcion = 'ADMIN';            
+                $rol->permisos->push($permiso); 
+            }
             $datos->datos=$rol->permisos;
             $datos->datos_len=$rol->permisos->count();
         } 

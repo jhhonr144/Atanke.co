@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('idiomas', function (Blueprint $table) {
+        Schema::create('tipo_contenidos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre',20);
+            $table->string('nombre');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('idiomas');
+        Schema::dropIfExists('tipo_contenidos');
     }
 };

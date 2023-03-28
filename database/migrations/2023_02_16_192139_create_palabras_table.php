@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('palabras', function (Blueprint $table) {
             $table->id();
-            $table->string('palabra');
+            $table->string('palabra',25);
             $table->string('pronunciar');
-            $table->timestamps();
-
+            $table->timestamps(); 
             $table->unsignedBigInteger('fk_user');
             $table->foreign('fk_user')->references('id')->on('users');
             $table->unsignedBigInteger('fk_idioma');
