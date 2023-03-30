@@ -24,9 +24,10 @@ class CrearCuentaController extends Controller
                 ]
             );
             if ($validar->fails()) {
-                $datos->id = 1;
-                $datos->mensaje = "Error por datos erroneos";
-                $datos->datos = $validar->errors();
+                $datos->id = -1;
+                $datos->mensaje = "Error por datos erroneos";           
+                $datos->errores = $validar->errors();
+                
             } else {
                 $user = User::create([
                     'name' => $request->name,
@@ -42,7 +43,7 @@ class CrearCuentaController extends Controller
                 $datos->datos_len = $user->id;
             }
         } catch (\Exception $e) {
-            $datos->id = 1;
+            $datos->id = -1;
             $datos->mensaje = "Error crear user\n" . $e;
         }
         return response()->json($datos);
