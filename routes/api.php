@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\info\Index\DashboarController;
 use App\Http\Controllers\LecturaContenidoController;
 use App\Http\Controllers\LecturasController;
 use App\Http\Controllers\LecturasSessionController;
@@ -69,3 +71,5 @@ Route::get('/salir', [LoginController::class, 'salir']);
 //traducir palabras
 Route::post('/traducir', [traducirPalabrasController::class,'traducir']);
 Route::get('/Idiomas', [listarIdiomas::class,'listar']);
+Route::get('/Dashboar', [DashboarController::class,'contadores']);
+
