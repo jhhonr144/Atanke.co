@@ -22,7 +22,7 @@ class LogearController extends Controller
             }
             $user = User::where('email', $request->email)->firstOrFail();
             $token = $user->CreateToken('auth_token')->plainTextToken;
-            if($user->elEstado->nombre!='Activo'){
+            if($user->elEstado->nombre=='Activo'){
                 $user->remember_token=$token;
                 $user->save();
                 $datos->id = 0;
