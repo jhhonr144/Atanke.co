@@ -17,11 +17,12 @@ class LogearController extends Controller
             if (!Auth::attempt($request->only('email', 'password'))) {
                 $datos->id = 1;
                 $datos->mensaje = "Error al logearse.";
+                $datos->datos = null;
                 return response()->json($datos);
             }
             $user = User::where('email', $request->email)->firstOrFail();
             $token = $user->CreateToken('auth_token')->plainTextToken;
-            if($user->elEstado->nombre=='activo'){
+            if($user->elEstado->nombre!='Activo'){
                 $user->remember_token=$token;
                 $user->save();
                 $datos->id = 0;
