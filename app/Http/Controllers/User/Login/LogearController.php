@@ -37,6 +37,7 @@ class LogearController extends Controller
         } catch (\Exception $e) {
             $datos->id = 1;
             $datos->mensaje = "Error Logear user\n" . $e;
+            $datos->datos = null;
         }
         return response()->json($datos);
     }
