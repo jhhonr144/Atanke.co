@@ -17,6 +17,7 @@ class LogearController extends Controller
             if (!Auth::attempt($request->only('email', 'password'))) {
                 $datos->id = 1;
                 $datos->mensaje = "Error al logearse.";
+                $datos->datos = null;
                 return response()->json($datos);
             }
             $user = User::where('email', $request->email)->firstOrFail();
@@ -36,6 +37,7 @@ class LogearController extends Controller
         } catch (\Exception $e) {
             $datos->id = 1;
             $datos->mensaje = "Error Logear user\n" . $e;
+            $datos->datos = null;
         }
         return response()->json($datos);
     }
