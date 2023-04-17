@@ -30,6 +30,7 @@ Headers obligatorios: token,data
 ```
 {
 "codIdioma" :1,
+"codIdioma2" :2,
 "palabra": "Mama",
 "traduccion": "Mon",
 "pronunciacion" : "Moon",

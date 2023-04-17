@@ -35,7 +35,7 @@ class sugerirTraduccionController extends BaseController
             'estado' => 'I',
             'pronunciar' => '',
             'fk_user' => $input['fkUser'],
-            'fk_idioma' => $input['codIdioma']
+            'fk_idioma' => $input['codIdioma2']
         ]);
 
         // Verificar si ya existe la relación en la tabla palabras_palabras_r
