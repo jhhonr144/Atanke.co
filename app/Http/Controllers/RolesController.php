@@ -8,12 +8,7 @@ use App\Models\Roles;
 use Illuminate\Http\Request; 
 
 class RolesController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+{ 
     public function index()
     {
         $roles = Roles::all();
@@ -58,23 +53,7 @@ class RolesController extends Controller
             $datos->mensaje="Error al listar Roles\n".$e; 
         }
         return response()->json($datos);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
- 
-    public function store(Request $request)
-    {
-        //
-    }
-
+    }  
    
     public function show(Roles $role)
     {  
@@ -93,21 +72,37 @@ class RolesController extends Controller
         return response()->json(($datos));
     }
 
-    
-    public function edit(Roles $roles)
+    public function store(Request $req)
     {
-        //
+        $datos = new Datos();
+        if ($this->permiso($req)) {
+            $rol = new Roles(); 
+            $rol->nombre=$req->nombre;
+            $rol->descripcion=$req->descripcion;
+            if ($rol->save()) {
+                $datos->id = 0;
+                $datos->mensaje = "Agregado con exito"; 
+            } else {
+                $datos->id = 1;
+                $datos->mensaje = "Error al agregar";
+            }
+        } else {
+            $datos->id = -1;
+            $datos->mensaje = "Sin Permiso para agregar un nuevo rol";
+        }
+        return response()->json($datos);
     }
 
-   
-    public function update(Request $request, Roles $roles)
+    private function permiso(Request $request)
     {
-        //
-    }
-
-   
-    public function destroy(Roles $roles)
-    {
-        //
+        $permiso = false;
+        $user = $request->user();
+        if ($user->elRol->nombre === 'admin') {
+            $permiso = true;
+        } else
+        if ($user->elPermiso->contains('nombre', 'add_rol')) {
+            $permiso = true;
+        }
+        return $permiso;
     }
 }
