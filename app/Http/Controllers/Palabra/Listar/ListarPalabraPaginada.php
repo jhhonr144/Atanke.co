@@ -19,7 +19,7 @@ class ListarPalabraPaginada extends Controller
             //palabra a coincidir
             $dato = $req->has('dato') ? $req->dato : null;
             //idioma all=todos
-            $idioma = $req->has('idioma') ? $req->idioma : null;
+            $idioma = $req->has('idioma') ? $req->idioma : 0;
             $estado = $req->has('estado') ? $req->estado : 'aprobado';
             $query = Palabras::query();
             if ($estado == '')
@@ -30,14 +30,12 @@ class ListarPalabraPaginada extends Controller
                 }
                 $query->where('estado', $estado);
             }
-            if ($idioma & $idioma != 0) {
-                $query->where('fk_idioma', $idioma);
-            }
             if ($dato != '') {
-                $query->where(function ($q) use ($dato) {
-                    $q->where('palabra', 'like', "%$dato%")
-                        ->orWhere('pronunciar', 'like', "%$dato%");
-                });
+                $query->where('palabra', 'like', "%$dato%");
+                $query->where('pronunciar', 'like', "%$dato%");
+            }
+            if ($idioma != 0) {
+                $query->where('fk_idioma', $idioma);
             }
             $query->with('user:id,name,email')
                 ->with('idioma')
