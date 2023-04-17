@@ -24,7 +24,7 @@ class sugerirTraduccionController extends BaseController
 
         $palabra_id = $palabra ? $palabra->id : DB::table('palabras')->insertGetId([
             'palabra' => $input['palabra'],
-            'estado' => 'I',
+            'estado' => 'pendiente',
             'pronunciar' => $input['pronunciacion'],
             'fk_user' => $input['fkUser'],
             'fk_idioma' => $input['codIdioma'],
@@ -32,7 +32,7 @@ class sugerirTraduccionController extends BaseController
 
         $traduccion_id = $traduccion ? $traduccion->id : DB::table('palabras')->insertGetId([
             'palabra' => $input['traduccion'],
-            'estado' => 'I',
+            'estado' => 'pendiente',
             'pronunciar' => '',
             'fk_user' => $input['fkUser'],
             'fk_idioma' => $input['codIdioma2']
@@ -52,7 +52,7 @@ class sugerirTraduccionController extends BaseController
                 'relacion' => 'Traducion',
                 'fk_user' => $input['fkUser'],
 
-                'estado' => 'I'
+                'estado' => 'pendiente'
             ]);
 
             DB::table('palabras_palabras_r')->insert([
