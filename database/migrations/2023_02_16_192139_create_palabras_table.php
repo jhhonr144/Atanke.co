@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->string('palabra',25);
             $table->string('pronunciar');
-            $table->string('estado',2);
             $table->timestamps(); 
             $table->unsignedBigInteger('fk_user');
             $table->foreign('fk_user')->references('id')->on('users');
