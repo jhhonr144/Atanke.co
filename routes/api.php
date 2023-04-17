@@ -23,7 +23,6 @@ use App\Http\Controllers\updateuser\updateUserController;
 use App\Http\Controllers\User\Login\LogearController;
 use App\Http\Controllers\User\Registro\CrearCuentaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController; 
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -69,8 +68,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/Contenido', [LecturaContenidoController::class, 'eliminar']);
 
     Route::get('/users/{id}', [updateUserController::class, 'listuser']);
-    Route::patch('/updateusers/{id}', [updateUserController::class, 'updateuser']);
-    Route::post('/sugerirTraduccion', [sugerirTraduccionController::class,'sugerirTraduccion']);
+    Route::patch('/updateusers/{id}', [updateUserController::class, 'updateuser']); 
+    Route::post('/sugerirTraduccion', [sugerirTraduccionController::class,'sugerirTraduccion']); 
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
 Route::post('/login', [LogearController::class, 'login'])->name('login');
