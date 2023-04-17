@@ -19,7 +19,6 @@ Servicios que agrupa funcionalidades necesarias para un traductor indigena.
     - [Endpoints](#endpoints)
     - [Autores](#autores)
     - [Licencia](#licencia)
-
  ---
 
  ## Descripción

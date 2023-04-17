@@ -74,7 +74,6 @@ class sugerirTraduccionController extends BaseController
                 'dataHeader' => $this->ResponseOk(2, []),
                 'mensaje' => 'Ya existe una traduccion para estas palabras'
             ];
-
             return response()->json($response);
         }
     }
