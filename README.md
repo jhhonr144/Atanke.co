@@ -19,6 +19,7 @@ Servicios que agrupa funcionalidades necesarias para un traductor indigena.
     - [Endpoints](#endpoints)
     - [Autores](#autores)
     - [Licencia](#licencia)
+
  ---
 
  ## Descripción
@@ -42,7 +43,7 @@ Servicio para sugerir palabras para traduccion
 
 - **DEV**
     - traducirPalabras: http://127.0.0.1:8000/api/traducir
-    - sugerirTraduccion: http://127.0.0.1:8000/api/sugerirTraduccion
+    - traducirPalabras: http://127.0.0.1:8000/api/traducir
 
 ## Autores
 
