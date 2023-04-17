@@ -60,7 +60,7 @@ class sugerirTraduccionController extends BaseController
                 'palabra_id_2' => $palabra_id,
                 'relacion' => 'Traducion',
                 'fk_user' => $input['fkUser'],
-                'estado' => 'I'
+                'estado' => 'pendiente'
             ]);
 
             $response = [
