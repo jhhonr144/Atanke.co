@@ -25,7 +25,8 @@ class CrearCuentaController extends Controller
             );
             if ($validar->fails()) {
                 $datos->id = -1;
-                $datos->mensaje = "Error por datos erroneos";           
+                $datos->mensaje = "Error por datos erroneos"; 
+                $datos->datos = null;          
                 $datos->errores = $validar->errors();
                 
             } else {

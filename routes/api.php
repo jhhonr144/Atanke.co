@@ -68,7 +68,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/Contenido', [LecturaContenidoController::class, 'eliminar']);
 
     Route::get('/users/{id}', [updateUserController::class, 'listuser']);
-    Route::patch('/updateusers/{id}', [updateUserController::class, 'updateuser']);
+    Route::patch('/updateusers/{id}', [updateUserController::class, 'updateuser']); 
+    Route::post('/sugerirTraduccion', [sugerirTraduccionController::class,'sugerirTraduccion']); 
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
 Route::post('/login', [LogearController::class, 'login'])->name('login');
