@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -23,6 +24,8 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
+            'r_users_roles' => 1, //defailt
+            'r_users_estados' => 1 //activo
         ];
     }
 
@@ -35,6 +38,43 @@ class UserFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
+        ]);
+    }
+
+    public function UserDefault()
+    {         
+        return User::make([
+            'name' =>  fake()->name(),
+            'email' =>  fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'r_users_roles' => 1, //default
+            'r_users_estados' => 1 //activo
+        ]);
+    }
+    public function UserAdmin()
+    {
+        return User::make([
+            'name' => fake()->name(),
+            'email' => fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'r_users_roles' => 2, //admin
+            'r_users_estados' => 1 //activo
+        ]);
+    }
+    public function UserAdminDesactivo()
+    {
+        return User::make([
+            'name' =>  fake()->name(),
+            'email' =>  fake()->unique()->safeEmail(),
+            'email_verified_at' => now(),
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'remember_token' => Str::random(10),
+            'r_users_roles' => 2, //admin
+            'r_users_estados' => 2 //no activo
         ]);
     }
 }

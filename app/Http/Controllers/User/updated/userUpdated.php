@@ -33,19 +33,19 @@ class userUpdated extends Controller
                     $user->r_users_estados = $request->estado;
                     $user->save();
                     $datos->id = 0;
-                    $datos->mensaje = "Editado el Usuario\n";
+                    $datos->mensaje = "Editado el Usuario";
                 }
                 else {
                     $datos->id = -1;
-                    $datos->mensaje = "Usuario no Existe\n";
+                    $datos->mensaje = "Usuario no Existe";
                 }
             } else {
                 $datos->id = -1;
-                $datos->mensaje = "Falta datos, para Editar el Usuario\n";
+                $datos->mensaje = "Falta datos, para Editar el Usuario";
             }
         } else {
             $datos->id = -1;
-            $datos->mensaje = "Sin Permiso, para Editar Usuario\n";
+            $datos->mensaje = "Sin Permiso, para Editar Usuario";
         }
         return response()->json($datos);
     }
@@ -64,25 +64,26 @@ class userUpdated extends Controller
             if (
                 $request->has('id') && $request->has('r_users_estados')
             ) {
-                $user = User::where('id', $request->id)->first();
-                if($user){ 
-                    $user->r_users_estados = $request->r_users_estados;
-                    $user->save();
+                $userEditar = User::where('id', $request->id)->first();
+                if($userEditar){ 
+                    $userEditar->r_users_estados = $request->r_users_estados;
+                    $userEditar->save();
                     $datos->id = 0;
-                    $datos->mensaje = "Editado el rol del Usuario\n";
+                    $datos->mensaje = "Editado el rol del Usuario";
                 }
                 else {
                     $datos->id = -1;
-                    $datos->mensaje = "Usuario no Existe\n";
+                    $datos->mensaje = "Usuario no Existe";
                 }
             } else {
                 $datos->id = -1;
-                $datos->mensaje = "Falta datos, para Editar el rol del Usuario\n";
+                $datos->mensaje = "Falta datos, para Editar el rol del Usuario";
             }
         } else {
             $datos->id = -1;
-            $datos->mensaje = "Sin Permiso, para Editar el rol del Usuario\n";
+            $datos->mensaje = "Sin Permiso, para Editar el rol del Usuario";
         }
         return response()->json($datos);
     }
+    
 }
