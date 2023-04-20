@@ -17,16 +17,16 @@ class EditarPalabra extends Controller
                 $palabra->estado=$request->a==0?'aprobado':'rechazado';
                 $palabra->save();
                 $datos->id = 0;
-                $datos->mensaje = "Palabra Editada\n";
+                $datos->mensaje = "Palabra Editada";
             }
             else{
                 $datos->id = 1;
-                $datos->mensaje = "Palabra no encontrada\n";
+                $datos->mensaje = "Palabra no encontrada";
             }
             
         } else {
             $datos->id = -1;
-            $datos->mensaje = "Sin Permiso para editar Estado de la Palabra\n";
+            $datos->mensaje = "Sin Permiso para editar Estado de la Palabra";
         }
         return response()->json($datos);
     }
