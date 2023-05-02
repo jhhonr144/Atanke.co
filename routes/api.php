@@ -23,7 +23,7 @@ use App\Http\Controllers\updateuser\updateUserController;
 use App\Http\Controllers\User\Login\LogearController;
 use App\Http\Controllers\User\Registro\CrearCuentaController;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/ok', [LoginController::class, 'ok'])->name('ok');
