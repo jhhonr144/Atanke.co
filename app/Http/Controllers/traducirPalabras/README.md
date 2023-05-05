@@ -29,8 +29,9 @@ Headers obligatorios: token,data
 ##### REQUEST
 ```
 {
-   "data" :"Hola Mayor Hola Hola Saludos"
-}
+   "data" :"Dusano Hola perro",
+   "fk_idioma":2           
+}       
 
 ```
 

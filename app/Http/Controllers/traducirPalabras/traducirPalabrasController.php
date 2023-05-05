@@ -21,6 +21,7 @@ class traducirPalabrasController extends BaseController
 
         $palabras = explode(' ', $request->input('data'));
         $traducciones = [];
+        $fk_idioma = $request->input('fk_idioma');
 
         foreach ($palabras as $palabra) {
             $palabra = trim($palabra);
@@ -30,13 +31,27 @@ class traducirPalabrasController extends BaseController
                 continue;
             }
 
+            // Busca la traduccion
             $traduccion = DB::table('palabras_palabras_r')
                 ->leftJoin('palabras', 'palabras_palabras_r.palabra_id_1', '=', 'palabras.id')
                 ->leftJoin('palabras AS p2', 'palabras_palabras_r.palabra_id_2', '=', 'p2.id')
+                ->where('palabras.fk_idioma', $fk_idioma)
                 ->where('palabras.palabra', $palabra)
                 ->select('p2.palabra')
                 ->get()
                 ->first();
+
+            // Si no se encontró traduccion
+            if (!$traduccion) {
+                $traduccion = DB::table('palabras_palabras_r')
+                    ->leftJoin('palabras', 'palabras_palabras_r.palabra_id_2', '=', 'palabras.id')
+                    ->leftJoin('palabras AS p2', 'palabras_palabras_r.palabra_id_1', '=', 'p2.id')
+                    ->where('palabras.fk_idioma', $fk_idioma)
+                    ->where('palabras.palabra', $palabra)
+                    ->select('p2.palabra')
+                    ->get()
+                    ->first();
+            }
 
             if ($traduccion) {
                 $traducciones[] = $traduccion->palabra;
