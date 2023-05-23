@@ -82,5 +82,6 @@ Route::post('/traducir', [traducirPalabrasController::class, 'traducir']);
 Route::get('/Idiomas', [listarIdiomas::class, 'listar']);
 Route::get('/Dashboar', [DashboarController::class, 'contadores']);
 
+
 Route::get('/Lecturas', [LecturasController::class, 'listar']);
 Route::get('/Sesiones', [LecturasSessionController::class, 'listar']);
