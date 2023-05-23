@@ -33,6 +33,7 @@ class LogearController extends Controller
             else{
                 $datos->id = 1;
                 $datos->mensaje = "usuario Inactivo"; 
+                $datos->datos = null;
             }
         } catch (\Exception $e) {
             $datos->id = 1;

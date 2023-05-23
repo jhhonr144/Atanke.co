@@ -35,7 +35,8 @@ class CrearCuentaController extends Controller
                     'email' => $request->email,
                     'password' =>  Hash::make($request->password),
                     'r_users_roles' => 1,
-                    'r_users_estados' => 1
+                    'r_users_estados' => 1,
+                    'image_path' =>''
                 ]);
                 $token = $user->CreateToken('auth_token')->plainTextToken;
                 $datos->id = 0;
