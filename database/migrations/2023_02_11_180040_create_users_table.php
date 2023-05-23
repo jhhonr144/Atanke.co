@@ -28,7 +28,6 @@ return new class extends Migration
             $table->unsignedBigInteger('r_users_estados');
             $table->foreign('r_users_estados')->references('id')->on('estados');
             $table->string('image_path')->nullable();
-
         });
     }
 

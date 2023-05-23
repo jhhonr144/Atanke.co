@@ -22,7 +22,6 @@ class UsersController extends Controller
                 ->orWhere('email', 'like', '%' . $dato . '%');
         }
         $User = $query->paginate($cantidad, ['*'], 'page', $pagina);
-
         $datos = new Datos();
         try {
             $datos->id = $User->lastPage();
@@ -35,7 +34,6 @@ class UsersController extends Controller
         }
         return response()->json($datos);
     }
-
 
     public function uploadImage(Request $request)
     {
@@ -61,15 +59,6 @@ class UsersController extends Controller
 
     }
 
-
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\User  $User
-     * @return \Illuminate\Http\Response
-     */
-  
     public function show(User $role)
     {
         $User = User::find($role->id);
