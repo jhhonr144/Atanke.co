@@ -1,0 +1,4 @@
+
+//para el cliente no necesita token
+//debria ser un servicio sin que retorne mucha info pero aja
+GET http://127.0.0.1:8000/api/Sesiones?fk_lectura=1 

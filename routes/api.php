@@ -23,7 +23,8 @@ use App\Http\Controllers\updateuser\updateUserController;
 use App\Http\Controllers\User\Login\LogearController;
 use App\Http\Controllers\User\Registro\CrearCuentaController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController;
+use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController; 
+use App\Http\Controllers\User\perfil\perfilController;
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/ok', [LoginController::class, 'ok'])->name('ok');
@@ -33,11 +34,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/Permisos', [PermisosController::class, 'eliminarRelacion']);
 
     Route::get('/user', [UsersController::class, 'listarP']);
-    Route::post('/users/upload-image', [UsersController::class, 'uploadImage']);
     Route::put('/user', [userUpdated::class, 'update']);
     Route::put('/user/rol', [userUpdated::class, 'updateRol']);
 
-    Route::get('/Lecturas', [LecturasController::class, 'listar']);
     Route::post('/Lecturas', [LecturasController::class, 'create']);
     Route::put('/Lecturas', [LecturasController::class, 'update']);
     Route::post('/LecturasFoto', [LecturasController::class, 'foto']);
@@ -68,7 +67,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/Contenido', [LecturaContenidoController::class, 'eliminar']);
 
     Route::get('/users/{id}', [updateUserController::class, 'listuser']);
+    Route::get('/users', [perfilController::class, 'yo']);
+    Route::post('/users/upload-image', [UsersController::class, 'uploadImage']);
     Route::patch('/updateusers/{id}', [updateUserController::class, 'updateuser']); 
+
     Route::post('/sugerirTraduccion', [sugerirTraduccionController::class,'sugerirTraduccion']); 
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
@@ -79,3 +81,7 @@ Route::get('/salir', [LoginController::class, 'salir']);
 Route::post('/traducir', [traducirPalabrasController::class, 'traducir']);
 Route::get('/Idiomas', [listarIdiomas::class, 'listar']);
 Route::get('/Dashboar', [DashboarController::class, 'contadores']);
+
+
+Route::get('/Lecturas', [LecturasController::class, 'listar']);
+Route::get('/Sesiones', [LecturasSessionController::class, 'listar']);
