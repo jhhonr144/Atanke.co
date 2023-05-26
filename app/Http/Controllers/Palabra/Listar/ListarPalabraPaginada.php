@@ -23,7 +23,7 @@ class ListarPalabraPaginada extends Controller
             $estado = $req->has('estado') ? $req->estado : 'aprobado';
             $query = Palabras::query();
             if ($estado == '')
-                $estado = 'aprobado'; 
+                $estado = 'aprobado';
             if ($estado != 'all') {
                 if (!in_array($estado, ['pendiente', 'aprobado', 'rechazado'])) {
                     $estado = 'aprobado';
@@ -74,5 +74,39 @@ class ListarPalabraPaginada extends Controller
             $permiso = true;
         }
         return $permiso;
+    }
+
+
+    public function listarLibre(Request $req)
+    {
+        $datos = new Datos();
+        //paginado
+        $pagina = $req->has('pagina') ? $req->pagina : 1;
+        $cantidad = $req->has('cantidad') ? $req->cantidad : 1000;  
+        $idioma = $req->has('idioma') ? $req->idioma : 0; 
+        $query = Palabras::query(); 
+        $query->where('estado', 'aprobado'); 
+        if ($idioma != 0) {
+            $query->where('fk_idioma', $idioma);
+        }
+        $query ->with('multimedia')
+            ->withCount('multimedia as multilent');
+        $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
+        if ($palabra->count() > 0) {
+            try {
+                $datos->id = $palabra->lastPage();
+                $datos->mensaje = "Listado de Palabra #{$pagina}";
+                $datos->datos = $palabra->items();
+                $datos->datos_len = $palabra->total();
+            } catch (\Exception $e) {
+                $datos->id = -1;
+                $datos->mensaje = "Error al listar Palabra\n" . $e;
+            }
+        } else {
+            $datos->id = -1;
+            $datos->mensaje = "Sin Palabra\n";
+        }
+
+        return response()->json($datos);
     }
 }

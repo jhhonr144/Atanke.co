@@ -1,0 +1,28 @@
+//cantidad por default 1k
+//pagina 1
+//idioma todo=0
+
+GET http://127.0.0.1:8000/api/Libre/Palabras 
+
+/*
+{
+    "id": 1,
+  "mensaje": "Listado de Palabra #1",
+  "datos_len": 1,
+  "datos": [
+    {
+      "id": 2,
+      "palabra": "Mayor",
+      "pronunciar": "mayor",
+      "created_at": null,
+      "updated_at": "2023-03-25T00:34:32.000000Z",
+      "fk_user": 7,
+      "fk_idioma": 1,
+      "estado": "aprobado",
+      "multilent": 0,
+      "multimedia": []
+    }
+  ],
+  "errores": null
+}
+*/

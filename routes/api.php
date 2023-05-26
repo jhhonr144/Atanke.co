@@ -85,3 +85,6 @@ Route::get('/Dashboar', [DashboarController::class, 'contadores']);
 
 Route::get('/Lecturas', [LecturasController::class, 'listar']);
 Route::get('/Sesiones', [LecturasSessionController::class, 'listar']);
+
+
+Route::get('/Libre/Palabras', [ListarPalabraPaginada::class, 'listarLibre']);
