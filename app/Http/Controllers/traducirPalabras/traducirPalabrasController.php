@@ -37,6 +37,7 @@ class traducirPalabrasController extends BaseController
                 ->leftJoin('palabras AS p2', 'palabras_palabras_r.palabra_id_2', '=', 'p2.id')
                 ->where('palabras.fk_idioma', $fk_idioma)
                 ->where('palabras.palabra', $palabra)
+                ->where('palabras.estado', 'aprobado')
                 ->select('p2.palabra')
                 ->get()
                 ->first();
@@ -48,6 +49,7 @@ class traducirPalabrasController extends BaseController
                     ->leftJoin('palabras AS p2', 'palabras_palabras_r.palabra_id_1', '=', 'p2.id')
                     ->where('palabras.fk_idioma', $fk_idioma)
                     ->where('palabras.palabra', $palabra)
+                    ->where('palabras.estado', 'aprobado')
                     ->select('p2.palabra')
                     ->get()
                     ->first();
