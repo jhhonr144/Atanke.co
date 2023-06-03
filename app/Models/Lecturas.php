@@ -16,6 +16,7 @@ class Lecturas extends Model
         'fk_portada',
         'fk_tipo',
         'user_id',
+        'author'
     ];
 
     public function tipo()

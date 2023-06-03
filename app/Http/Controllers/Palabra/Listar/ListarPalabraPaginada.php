@@ -82,14 +82,14 @@ class ListarPalabraPaginada extends Controller
         $datos = new Datos();
         //paginado
         $pagina = $req->has('pagina') ? $req->pagina : 1;
-        $cantidad = $req->has('cantidad') ? $req->cantidad : 1000;  
-        $idioma = $req->has('idioma') ? $req->idioma : 0; 
-        $query = Palabras::query(); 
-        $query->where('estado', 'aprobado'); 
+        $cantidad = $req->has('cantidad') ? $req->cantidad : 1000;
+        $idioma = $req->has('idioma') ? $req->idioma : 0;
+        $query = Palabras::query();
+        $query->where('estado', 'aprobado');
         if ($idioma != 0) {
             $query->where('fk_idioma', $idioma);
         }
-        $query ->with('multimedia')
+        $query->with('multimedia')
             ->withCount('multimedia as multilent');
         $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
         if ($palabra->count() > 0) {
@@ -107,6 +107,21 @@ class ListarPalabraPaginada extends Controller
             $datos->mensaje = "Sin Palabra\n";
         }
 
+        return response()->json($datos);
+    }
+    public function listarde(Request $req)
+    {
+        $datos = new Datos();
+        $palabra= Palabras::where('fk_user',$req->de)->orderBy('estado', 'desc')->get();
+        try {
+            $datos->id = 0;
+            $datos->mensaje = "Listado de Palabra de user ".$req->de;
+            $datos->datos = $palabra;
+            $datos->datos_len =  $palabra->count();
+        } catch (\Exception $e) {
+            $datos->id = -1;
+            $datos->mensaje = "Error al listar Palabra\n" . $e;
+        }
         return response()->json($datos);
     }
 }

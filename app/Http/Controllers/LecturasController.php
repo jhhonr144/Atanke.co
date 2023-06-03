@@ -51,6 +51,7 @@ class LecturasController extends Controller
                 $lectura->fk_portada = $request->fk_portada == 0 ? 1 : $request->fk_portada;
                 $lectura->fk_tipo = $request->categoria;
                 $lectura->user_id = $user->id;
+                $lectura->author = $request->Author;
                 $lectura->save();
             } else {
                 $datos->id = -1;
