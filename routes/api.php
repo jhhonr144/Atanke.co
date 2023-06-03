@@ -88,3 +88,4 @@ Route::get('/Sesiones', [LecturasSessionController::class, 'listar']);
 
 
 Route::get('/Libre/Palabras', [ListarPalabraPaginada::class, 'listarLibre']);
+Route::get('/Libre/Palabras/{de}', [ListarPalabraPaginada::class, 'listarde']);
