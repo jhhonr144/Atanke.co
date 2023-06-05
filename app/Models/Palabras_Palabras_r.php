@@ -16,7 +16,7 @@ class Palabras_Palabras_r extends Model
     'palabra_id_1',
     'palabra_id_2',
     'relacion',
-    'fk_user', 'dateCreate'
+    'fk_user', 'dateCreate', 'estado'
   ];
 
   public function palabra1()
