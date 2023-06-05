@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Datos;
 use App\Models\Lecturas;
+use App\Models\Palabras_Palabras_r;
 use Illuminate\Http\Request;
 
 class LecturasController extends Controller
@@ -121,6 +122,14 @@ class LecturasController extends Controller
             $datos->id = -1;
             $datos->mensaje = "Sin Permiso, para Eliminar la lectura\n";
         }
+        return response()->json($datos);
+    }
+    public function relaciones(){
+        $datos = new Datos(); 
+        $datos->id = 0;
+        $datos->mensaje = "Eliminada la lectura\n";
+        $datos->datos=$r=Palabras_Palabras_r::where('estado','aprobado')->get();
+        $datos->datos_len=$r->count();
         return response()->json($datos);
     }
 }
