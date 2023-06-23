@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Palabras extends Model
 {
     use HasFactory;
-    protected $fillable = ['palabra', 'pronunciar', 'fk_user', 'fk_idioma','estado'];
+    protected $fillable = ['palabra', 'pronunciar', 'fk_user', 'fk_idioma', 'estado'];
 
     public function user()
     {
@@ -28,6 +28,7 @@ class Palabras extends Model
             'fk_multimedia'
         );
     }
+  
     public function multimediaTipo($tipo)
     {
         return $this->belongsToMany(
@@ -35,6 +36,6 @@ class Palabras extends Model
             'palabras_multimedia_r',
             'fk_palabra',
             'fk_multimedia'
-        ) ->where('fk_tm', $tipo)->optional();
+        )->where('fk_tm', $tipo)->optional();
     }
 }
