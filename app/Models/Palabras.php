@@ -26,9 +26,10 @@ class Palabras extends Model
             'palabras_multimedia_r',
             'fk_palabra',
             'fk_multimedia'
-        );
+        )->withPivot('estado'); 
     }
-  
+    
+
     public function multimediaTipo($tipo)
     {
         return $this->belongsToMany(

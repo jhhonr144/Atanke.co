@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Palabra\Relacion;
 
 use App\Http\Controllers\Controller;
 use App\Models\Datos;
+use App\Models\Palabras;
+use App\Models\Palabras_Multimedia_r;
 use App\Models\Palabras_Palabras_r;
 use Illuminate\Http\Request;
 
@@ -95,8 +97,7 @@ class PalabraRelacionController extends Controller
             $datos->mensaje = "Sin Permiso para editar Estado de la Palabra\n";
         }
         return response()->json($datos);
-    }
-
+    }  
 
     private function permiso(Request $request, $cual)
     {
@@ -110,4 +111,46 @@ class PalabraRelacionController extends Controller
         }
         return $permiso;
     }
+
+    public function agregar(Request $request){
+        $datos = new Datos();
+        if ($this->permiso($request, 'admin')) {
+            $palabra1 = Palabras::where('id', $request->palabra1)->first();
+            $palabra2 = Palabras::where('id', $request->palabra2)->first();
+            if ($palabra1 && $palabra2) {
+                $rela = new Palabras_Palabras_r();
+                $rela->palabra_id_1=$request->palabra1;
+                $rela->palabra_id_2=$request->palabra2;
+                $rela->relacion=$request->tipo;
+                $rela->fk_user=$request->user()->id;
+                $rela->estado="aprobado"; 
+                $rela->save();
+                $datos->id = 0;
+                $datos->mensaje = "Palabra Relaccionada\n";
+            } else {
+                $datos->id = 1;
+                $datos->mensaje = "Palabra no encontrada\n";
+            }
+        } else {
+            $datos->id = -1;
+            $datos->mensaje = "Sin Permiso crear la relaccion";
+        }
+        return response()->json($datos);
+    }
+
+    public function estado(Request $req)
+    {     
+        $datos = new Datos();   
+        $pa = Palabras_Multimedia_r::where('fk_palabra', $req->fk_palabra)
+            ->where("fk_multimedia", $req->fk_multimedia)
+            ->first();
+        
+        $pa->estado = $req->es == "A" ? "aprobado" : "rechazado";
+        $pa->save(); 
+        
+        $datos->id = 0;
+        $datos->mensaje = "Multimedia Editado";
+        return response()->json($datos);
+    }
+    
 }

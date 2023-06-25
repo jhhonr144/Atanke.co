@@ -8,8 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Palabras_Palabras_r extends Model
 {
   use HasFactory;
-  protected $table = "palabras_palabras_r";
-  protected $primaryKey = 'id';
+  protected $table = "palabras_palabras_r"; 
   public $incrementing = false;
   public $timestamps = false;
   protected $fillable = [

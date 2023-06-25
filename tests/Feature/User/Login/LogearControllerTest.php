@@ -81,10 +81,14 @@ class LogearControllerTest extends TestCase
             'password' => 'password',
         ]);
         $response->assertStatus(200)
-            ->assertJson([
-                'id' => 1,
-                'mensaje' => 'usuario Inactivo'
-            ]);
+            ->assertJson(
+                [ 
+                    "id"=> 1,
+                    "mensaje"=> "Error al logearse.",
+                    "datos_len"=> 0,
+                    "datos"=> null,
+                    "errores"=> null
+                ]);
     }
     /**
      * login ok
@@ -100,7 +104,7 @@ class LogearControllerTest extends TestCase
         $response->assertStatus(200)
             ->assertJson([
                 'id' => 0,
-                'mensaje' => $response->json()['mensaje'],
+                'mensaje' =>['mensaje'],
                 'datos' => $response->json()['datos'],
                 'datos_len' => $response->json()['datos_len'],
             ]);

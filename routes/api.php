@@ -57,6 +57,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     
     Route::get('/relacionPalabra', [PalabraRelacionController::class, 'listar']);
+    Route::post('/relacionPalabra', [PalabraRelacionController::class, 'agregar']);
+    Route::post('/relacionPalabra/EstadoFoto/{es}', [PalabraRelacionController::class, 'estado']);
+    
     Route::get('/relacionPalabra/Estado', [PalabraRelacionController::class, 'EditarEstado']);
 
     Route::get('/TipoContenido', [TipoContenidoController::class, 'index']);
