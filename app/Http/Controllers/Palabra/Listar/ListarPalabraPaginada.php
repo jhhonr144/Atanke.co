@@ -89,8 +89,16 @@ class ListarPalabraPaginada extends Controller
         if ($idioma != 0) {
             $query->where('fk_idioma', $idioma);
         }
-        $query->with('multimedia')
-            ->withCount('multimedia as multilent');
+        $query->with([ 
+            'multimedia' => function ($query) {
+                $query->where('palabras_multimedia_r.estado', 'aprobado');
+            },
+        ])->withCount([
+            'multimedia as multilent' => function ($query) {
+                $query->where('palabras_multimedia_r.estado', 'aprobado');
+            },
+        ]);
+        
         $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
         if ($palabra->count() > 0) {
             try {

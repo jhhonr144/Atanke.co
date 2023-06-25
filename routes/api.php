@@ -7,12 +7,12 @@ use App\Http\Controllers\LecturasSessionController;
 use App\Http\Controllers\LecturasTipoController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MultimediasController;
+use App\Http\Controllers\Palabra\Agregar\agregarFotoController;
 use App\Http\Controllers\Palabra\Agregar\agregarPalabra;
 use App\Http\Controllers\Palabra\Editar\EditarPalabra;
 use App\Http\Controllers\Palabra\Idiomas\listarIdiomas;
 use App\Http\Controllers\Palabra\Listar\ListarPalabraPaginada;
-use App\Http\Controllers\Palabra\Relacion\PalabraRelacionController;
-use App\Http\Controllers\PalabrasController;
+use App\Http\Controllers\Palabra\Relacion\PalabraRelacionController; 
 use App\Http\Controllers\PermisosController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\RolesController;
@@ -20,8 +20,7 @@ use App\Http\Controllers\TipoContenidoController;
 use App\Http\Controllers\traducirPalabras\traducirPalabrasController;
 use App\Http\Controllers\User\updated\userUpdated;
 use App\Http\Controllers\updateuser\updateUserController;
-use App\Http\Controllers\User\Login\LogearController;
-use App\Http\Controllers\User\Registro\CrearCuentaController;
+use App\Http\Controllers\User\Login\LogearController; 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController; 
 use App\Http\Controllers\User\perfil\perfilController;
@@ -54,6 +53,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/Palabras', [ListarPalabraPaginada::class, 'listar']);
     Route::get('/Palabras/Estado', [EditarPalabra::class, 'EditarEstado']);
     Route::post('/Palabras', [agregarPalabra::class, 'AgregarPalabra']);
+    Route::post('/Palabras/foto', [agregarFotoController::class, 'foto']);
 
     
     Route::get('/relacionPalabra', [PalabraRelacionController::class, 'listar']);
@@ -75,7 +75,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
 Route::post('/login', [LogearController::class, 'login'])->name('login');
-Route::post('/user/nuevo', [CrearCuentaController::class, 'registro']);
 Route::get('/salir', [LoginController::class, 'salir']);
 //traducir palabras
 Route::post('/traducir', [traducirPalabrasController::class, 'traducir']);

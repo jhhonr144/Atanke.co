@@ -105,11 +105,10 @@ class LecturaContenidoController extends Controller
                 $validator = Validator::make($request->all(), [
                     'contenido' => 'file|mimetypes:video/avi,video/mp4,image/jpeg,image/png,image/jpg|max:20480',
                 ]);
-            else {
+            else 
                 $validator = Validator::make($request->all(), [
                     'contenido.*' => 'file|mimetypes:video/avi,video/mp4,image/jpeg,image/png,image/jpg|max:20480',
                 ]);
-            }
             if ($validator->fails()) {
                 $datos->id = -1;
                 $datos->mensaje = "Error al Guardar Contenido, para Crear el Contenido\n";
