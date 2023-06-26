@@ -30,16 +30,23 @@ class agregarPalabra extends Controller
                         $datos->id = 1;
                         $datos->mensaje = "Lo sentimos, Faltaron datos para poder crear la palabra.";
                     } else {
-                        $palabra->palabra = $req->palabra;
-                        $palabra->fk_idioma = $req->fk_idioma;
-                        $palabra->fk_user = $this->user->id;
-                        if ($req->has('pronunciar'))
-                            $palabra->pronunciar = $req->pronunciar;
+                        $pala = Palabras::where("palabra", $req->palabra)->first();
+                        if (!$pala) {
+                            $palabra->palabra = $req->palabra;
+                            $palabra->fk_idioma = $req->fk_idioma;
+                            $palabra->fk_user = $this->user->id;
+                            if ($req->has('pronunciar'))
+                                $palabra->pronunciar = $req->pronunciar . "";
+                            else
+                                $palabra->pronunciar = '';
+                            if ($this->permiso($req, 'admin'))
+                                $palabra->estado = 'Aprobado';
+                            $palabra->save();                            
+                            $datos->mensaje = "Agrego palabra.";
+                        }
                         else
-                            $palabra->pronunciar = '';
-                        $palabra->save();
+                        $datos->mensaje = "palabra repetida.";
                         $datos->id = 0;
-                        $datos->mensaje = "Agrego palabra.";
                         $datos->datos_len = $palabra->id;
                         $datos->datos = $palabra;
                     }

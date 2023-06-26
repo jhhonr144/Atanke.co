@@ -31,8 +31,10 @@ class ListarPalabraPaginada extends Controller
                 $query->where('estado', $estado);
             }
             if ($dato != '') {
-                $query->where('palabra', 'like', "%$dato%");
-                $query->where('pronunciar', 'like', "%$dato%");
+                $query->where(function ($query) use ($dato) {
+                    $query->where('palabra', 'like', "%$dato%")
+                        ->orWhere('pronunciar', 'like', "%$dato%");
+                });
             }
             if ($idioma != 0) {
                 $query->where('fk_idioma', $idioma);
@@ -41,6 +43,7 @@ class ListarPalabraPaginada extends Controller
                 ->with('idioma')
                 ->with('multimedia')
                 ->withCount('multimedia as multilent');
+            $query->orderBy('palabra', 'asc');
             $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
             if ($palabra->count() > 0) {
                 try {
@@ -54,7 +57,7 @@ class ListarPalabraPaginada extends Controller
                 }
             } else {
                 $datos->id = -1;
-                $datos->mensaje = "Sin Palabra\n";
+                $datos->mensaje = "Sin Palabra";
             }
         } else {
             $datos->id = -1;
@@ -84,20 +87,29 @@ class ListarPalabraPaginada extends Controller
         $pagina = $req->has('pagina') ? $req->pagina : 1;
         $cantidad = $req->has('cantidad') ? $req->cantidad : 1000;
         $idioma = $req->has('idioma') ? $req->idioma : 0;
+        
+        $dato = $req->has('dato') ? $req->dato : null;
         $query = Palabras::query();
-        $query->where('estado', 'aprobado');
         if ($idioma != 0) {
             $query->where('fk_idioma', $idioma);
         }
-        $query->with([ 
+        if ($dato != '') {
+            $query->where(function ($query) use ($dato) {
+                $query->where('palabra', 'like', "%$dato%")
+                    ->orWhere('pronunciar', 'like', "%$dato%");
+            });
+        }
+        $query->with([
             'multimedia' => function ($query) {
-                $query->where('palabras_multimedia_r.estado', 'aprobado');
+                $query->where('palabras_multimedia_r.estado', '=', 'aprobado');
             },
         ])->withCount([
             'multimedia as multilent' => function ($query) {
-                $query->where('palabras_multimedia_r.estado', 'aprobado');
+                $query->where('palabras_multimedia_r.estado', '=', 'aprobado');
             },
         ]);
+        
+        $query->where('estado', 'aprobado');
         
         $palabra = $query->paginate($cantidad, ['*'], 'pagina', $pagina);
         if ($palabra->count() > 0) {
@@ -112,7 +124,7 @@ class ListarPalabraPaginada extends Controller
             }
         } else {
             $datos->id = -1;
-            $datos->mensaje = "Sin Palabra\n";
+            $datos->mensaje = "Sin Palabra\n".$dato;
         }
 
         return response()->json($datos);

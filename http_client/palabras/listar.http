@@ -2,7 +2,8 @@
 //pagina 1
 //idioma todo=0
 
-GET http://127.0.0.1:8000/api/Libre/Palabras 
+GET http://127.0.0.1:8000/api/Palabras?dato=boca
+Authorization: Bearer 2|ByUvQP7gFAg2xNntdHEDPBc0OIpO4Ews3MysfezS
 
 /*
 {
