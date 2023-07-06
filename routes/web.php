@@ -12,8 +12,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
-    return ('Desarrollado por WillPozo,@ derecho reservado');
-    
+    return redirect("https://atanke.org/APP.APK");
+});  
+Route::get('/Dev', function () {
+    return ('Desarrollado por WillPozo,@derecho reservado'); 
 });  
