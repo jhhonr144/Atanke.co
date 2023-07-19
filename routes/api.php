@@ -21,6 +21,7 @@ use App\Http\Controllers\traducirPalabras\traducirPalabrasController;
 use App\Http\Controllers\User\updated\userUpdated;
 use App\Http\Controllers\updateuser\updateUserController;
 use App\Http\Controllers\User\Login\LogearController; 
+use App\Http\Controllers\User\Registro\CrearCuentaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController; 
 use App\Http\Controllers\User\perfil\perfilController;
