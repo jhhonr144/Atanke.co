@@ -21,6 +21,7 @@ use App\Http\Controllers\traducirPalabras\traducirPalabrasController;
 use App\Http\Controllers\User\updated\userUpdated;
 use App\Http\Controllers\updateuser\updateUserController;
 use App\Http\Controllers\User\Login\LogearController; 
+use App\Http\Controllers\User\Registro\CrearCuentaController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\sugerirTraduccion\sugerirTraduccionController; 
 use App\Http\Controllers\User\perfil\perfilController;
@@ -78,6 +79,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 Route::get('/no', [LoginController::class, 'no'])->name('no');
 Route::post('/login', [LogearController::class, 'login'])->name('login');
+Route::post('/user/nuevo', [CrearCuentaController::class, 'registro']);
 Route::get('/salir', [LoginController::class, 'salir']);
 //traducir palabras
 Route::post('/traducir', [traducirPalabrasController::class, 'traducir']);

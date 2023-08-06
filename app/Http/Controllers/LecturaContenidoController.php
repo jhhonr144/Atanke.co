@@ -118,12 +118,14 @@ class LecturaContenidoController extends Controller
                 if ($request->uno == '1') {
                     $image = $request->file('contenido');
                     $imageName = $user->id . '_' . time() . '.' . $image->getClientOriginalExtension();
-                    $image->storeAs('public/img/Contenido', $imageName, ['visibility' => 'public']);
+                    //$image->storeAs('public/img/Contenido', $imageName, ['visibility' => 'public']);                     
+                    $image->storeAs('Back/storage/img/Contenido', $imageName, ['visibility' => 'public']);   
                     $imageName .= ',';
                 } else {
                     foreach ($request->file('contenido') as $index => $file) {
                         $imageNam = $user->id . '_' . time() . '_' . $index . '.' . $file->getClientOriginalExtension();
-                        $file->storeAs('public/img/Contenido', $imageNam, ['visibility' => 'public']);
+                       // $file->storeAs('public/img/Contenido', $imageNam, ['visibility' => 'public']);                
+                        $file->storeAs('Back/storage/img/Contenido', $imageName, ['visibility' => 'public']); 
                         $imageName .= $imageNam . ',';
                     }
                 }
