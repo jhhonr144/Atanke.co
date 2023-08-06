@@ -44,28 +44,33 @@ class MultimediasController extends Controller
                 $datos->mensaje = "Error al Guardar Multimedia\n";
                 return response()->json($datos);
             } else {
-                $para='Contenido';
-                if(isset($request->para))
-                $para=$request->para; 
+                $para = 'Contenido';
+                if (isset($request->para))
+                    $para = $request->para;
                 $image = $request->file('contenido');
                 $imageName = $user->id . '_' . time() . '.' . $image->getClientOriginalExtension();
-                $image->storeAs('public/img/'.$para, $imageName, ['visibility' => 'public']);                               
-                
-                $multimedias=new Multimedias();
-                $multimedias->descripcion='';
-                $multimedias->multimedia=$imageName;
-                $multimedias->fk_user=$user->id;
-                $multimedias->fk_tm =1;
+                try {
+                    $image->storeAs('Back/storage/img/'.$para, $imageName, ['visibility' => 'public']);                               
+                    //$image->storeAs('public/img/' . $para, $imageName, ['visibility' => 'public']);
+                } catch (\Exception $e) {
+                    // Capturamos cualquier excepción y mostramos un mensaje personalizado
+                    $datos->id = -1;
+                    $datos->mensaje = "Error al guardar la imagen: " . $e->getMessage() . "\n";
+                }
+                $multimedias = new Multimedias();
+                $multimedias->descripcion = '';
+                $multimedias->multimedia = $imageName;
+                $multimedias->fk_user = $user->id;
+                $multimedias->fk_tm = 1;
                 $multimedias->save();
                 $datos->id = $multimedias->id;
-                $datos->mensaje = $imageName ;
+                $datos->mensaje = $imageName;
             }
-        }
-        else{
+        } else {
             $datos->id = -1;
             $datos->mensaje = "Error al Guardar Multimedia, No tiene permiso\n";
             return response()->json($datos);
-        } 
+        }
         return response()->json($datos);
     }
     /**
